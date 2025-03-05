@@ -10,11 +10,7 @@ export class NegociacoesList {
         this.negociacoesList.push(negociacao);
     }
 
-    listar(): Negociacao[] {
-        return [...this.negociacoesList];
+    listar(): ReadonlyArray<Negociacao> {
+        return this.negociacoesList;
     }
-
 }
-
-
-
