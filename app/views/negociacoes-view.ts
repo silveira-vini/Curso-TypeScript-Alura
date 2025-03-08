@@ -3,7 +3,7 @@ import { View } from "./view.js";
 
 export class NegociacoesView extends View<NegociacoesList> {
 
-    template(model: NegociacoesList): string {
+    protected template(negociacoesList: NegociacoesList): string {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -14,18 +14,20 @@ export class NegociacoesView extends View<NegociacoesList> {
                 </tr>
             </thead>
             <tbody>
-                ${model.listar().map(negociacao => {
-                    return `
-                        <tr>
-                            <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
-                            <td>${negociacao.quantidade}</td>
-                            <td>${negociacao.valor}</td>
-                        </tr>
-                    `
-                    }).join('')
-                }
+                ${this.linhasDaTabela(negociacoesList)}
             </tbody>
         </table>
         `
+    }
+
+    private linhasDaTabela(negociacoesList: NegociacoesList): string {
+        return negociacoesList.listar().map(negociacao => {
+            return `
+                <tr>
+                    <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+                    <td>${negociacao.quantidade}</td>
+                    <td>${negociacao.valor}</td>
+                </tr>
+            `}).join('');
     }
 }

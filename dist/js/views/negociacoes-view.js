@@ -1,6 +1,6 @@
 import { View } from "./view.js";
 export class NegociacoesView extends View {
-    template(model) {
+    template(negociacoesList) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -11,17 +11,20 @@ export class NegociacoesView extends View {
                 </tr>
             </thead>
             <tbody>
-                ${model.listar().map(negociacao => {
-            return `
-                        <tr>
-                            <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
-                            <td>${negociacao.quantidade}</td>
-                            <td>${negociacao.valor}</td>
-                        </tr>
-                    `;
-        }).join('')}
+                ${this.linhasDaTabela(negociacoesList)}
             </tbody>
         </table>
         `;
+    }
+    linhasDaTabela(negociacoesList) {
+        return negociacoesList.listar().map(negociacao => {
+            return `
+                <tr>
+                    <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+                    <td>${negociacao.quantidade}</td>
+                    <td>${negociacao.valor}</td>
+                </tr>
+            `;
+        }).join('');
     }
 }

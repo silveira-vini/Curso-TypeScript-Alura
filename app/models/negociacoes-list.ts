@@ -7,11 +7,11 @@ export class NegociacoesList {
     constructor() {
     }
 
-    adicionar(negociacao: Negociacao) {
+    public adicionar(negociacao: Negociacao) {
         this.negociacoesList.push(negociacao);
     }
 
-    listar(): readonly Negociacao[] {
+    public listar(): readonly Negociacao[] {
         return this.negociacoesList;
     }
 }
