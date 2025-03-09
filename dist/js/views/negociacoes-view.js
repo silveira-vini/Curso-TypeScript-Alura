@@ -1,5 +1,8 @@
 import { View } from "./view.js";
 export class NegociacoesView extends View {
+    constructor(selector) {
+        super(selector, true);
+    }
     template(negociacoesList) {
         return `
         <table class="table table-hover table-bordered">
@@ -11,12 +14,12 @@ export class NegociacoesView extends View {
                 </tr>
             </thead>
             <tbody>
-                ${this.linhasDaTabela(negociacoesList)}
+                ${this.tableLines(negociacoesList)}
             </tbody>
         </table>
         `;
     }
-    linhasDaTabela(negociacoesList) {
+    tableLines(negociacoesList) {
         return negociacoesList.listar().map(negociacao => {
             return `
                 <tr>

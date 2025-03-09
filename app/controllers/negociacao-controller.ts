@@ -18,18 +18,23 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoesList);
     }
 
-    public adiciona(): void {
-        if (this.diaDaSemanaUtil(this.inputData.valueAsDate)) {
-            const negociacao = this.criaNegociacao();
-            this.negociacoesList.adicionar(negociacao);
-            this.atualizaView();
-            this.limpaFormulario();
+    public add(): void {
+        if (this.businessDay(this.inputData.valueAsDate)) {
+            const negociacao = this.createNegociacao();
+            this.negociacoesList.add(negociacao);
+            this.updateView();
+            this.clearForm();
         } else {
             this.mensagemView.update('Apenas negociações em dias úteis são aceitas');
         }
     }
 
-    private criaNegociacao(): Negociacao {
+    private businessDay(date: Date): boolean {
+        const dia = date.getDay();
+        return dia != 5 && dia !== 6;
+    }
+
+    private createNegociacao(): Negociacao {
         const date: Date = new Date(this.inputData.value.replace(/-/g, ','));
         const quantidade: number = parseInt(this.inputQuantidade.value);
         const valor: number = parseFloat(this.inputValor.value);
@@ -37,22 +42,15 @@ export class NegociacaoController {
         return negociacao;
     }
 
-    private limpaFormulario(): void {
+    private updateView(): void {
+        this.negociacoesView.update(this.negociacoesList);
+        this.mensagemView.update('Negociação adicionada com sucesso');
+    }
+
+    private clearForm(): void {
         this.inputData.value = null;
         this.inputQuantidade.value = null;
         this.inputValor.value = null;
         this.inputData.focus();
     }
-
-    private atualizaView(): void {
-        this.negociacoesView.update(this.negociacoesList);
-        this.mensagemView.update('Negociação adicionada com sucesso');
-    }
-
-    private diaDaSemanaUtil(date: Date): boolean {
-        const dia = date.getDay();
-        console.log(dia);
-        return dia != 5 && dia !== 6;
-    }
-    
 }

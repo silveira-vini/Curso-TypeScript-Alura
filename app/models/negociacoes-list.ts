@@ -7,7 +7,7 @@ export class NegociacoesList {
     constructor() {
     }
 
-    public adicionar(negociacao: Negociacao) {
+    public add(negociacao: Negociacao) {
         this.negociacoesList.push(negociacao);
     }
 

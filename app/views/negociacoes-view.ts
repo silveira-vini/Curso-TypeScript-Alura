@@ -3,6 +3,11 @@ import { View } from "./view.js";
 
 export class NegociacoesView extends View<NegociacoesList> {
 
+    constructor(selector: string) {
+        super(selector, true);
+    }
+
+
     protected template(negociacoesList: NegociacoesList): string {
         return `
         <table class="table table-hover table-bordered">
@@ -14,13 +19,13 @@ export class NegociacoesView extends View<NegociacoesList> {
                 </tr>
             </thead>
             <tbody>
-                ${this.linhasDaTabela(negociacoesList)}
+                ${this.tableLines(negociacoesList)}
             </tbody>
         </table>
         `
     }
 
-    private linhasDaTabela(negociacoesList: NegociacoesList): string {
+    private tableLines(negociacoesList: NegociacoesList): string {
         return negociacoesList.listar().map(negociacao => {
             return `
                 <tr>
