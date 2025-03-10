@@ -12,14 +12,14 @@ export class NegociacaoController {
     private mensagemView = new MensagemView('#mensagemView');
 
     constructor() {
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
+        this.inputData = document.querySelector('#data') as HTMLInputElement;
+        this.inputQuantidade = document.querySelector('#quantidade') as HTMLInputElement;
+        this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacoesView.update(this.negociacoesList);
     }
 
     public add(): void {
-        if (this.businessDay(this.inputData.valueAsDate)) {
+        if (this.businessDay(this.inputData.valueAsDate as Date)) {
             const negociacao = this.createNegociacao();
             this.negociacoesList.add(negociacao);
             this.updateView();
@@ -48,9 +48,9 @@ export class NegociacaoController {
     }
 
     private clearForm(): void {
-        this.inputData.value = null;
-        this.inputQuantidade.value = null;
-        this.inputValor.value = null;
+        this.inputData.value = "";
+        this.inputQuantidade.value = "";
+        this.inputValor.value = "";
         this.inputData.focus();
     }
 }

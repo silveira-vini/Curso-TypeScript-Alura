@@ -39,9 +39,9 @@ export class NegociacaoController {
         this.mensagemView.update('Negociação adicionada com sucesso');
     }
     clearForm() {
-        this.inputData.value = null;
-        this.inputQuantidade.value = null;
-        this.inputValor.value = null;
+        this.inputData.value = "";
+        this.inputQuantidade.value = "";
+        this.inputValor.value = "";
         this.inputData.focus();
     }
 }

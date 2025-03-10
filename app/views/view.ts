@@ -5,10 +5,12 @@ export abstract class View<T> {
 
     constructor(selector: string, scape?: boolean) {
         const element = document.querySelector(selector);
-        if (!element) {
-            throw Error(`Seletor ${selector} não existe no DOM. Verifique.`);
+        if (element) {
+            this.element = element as HTMLElement;
+        } else {
+            throw new Error(`Seletor ${selector} não existe no DOM. Verifique`);
         }
-        this.element = element as HTMLElement;
+        
         if (scape) {
             this.scape = scape;
         }
